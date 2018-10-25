@@ -1,14 +1,15 @@
 import React from "react"
 import { connect } from "react-redux"
 import { toggleTodo } from "../redux/actions"
+import Todo from "./Todo"
 
 class TodoList extends React.Component {
 
-    getTodosWithVisibility(v) {
+    getTodosWithVisibility(visibility) {
 
         const { todos } = this.props
 
-        switch (v.toUpperCase()) {
+        switch (visibility.toUpperCase()) {
             case "ACTIVE":
                 return todos.filter(todo => !todo.completed)
             case "COMPLETED":
@@ -22,14 +23,12 @@ class TodoList extends React.Component {
 
         const { visibility, toggleTodo } = this.props
         return (
-            <ul style={{ listStyleType: "none" }}>
+            <ul>
                 {
                     this.getTodosWithVisibility(visibility).map(todo =>
-                        <li key={todo.id}><input type="checkbox" checked={todo.completed} onChange={() => toggleTodo(todo.id)} />
-                            <span style={todo.completed ? { textDecoration: "line-through" } : null}>
-                                {todo.title}
-                            </span>
-                        </li>
+
+                        <Todo key={todo.id} id={todo.id} completed={todo.completed} title={todo.title} onChange={() => toggleTodo(todo.id)} title={todo.title} />
+
                     )
 
                 }
@@ -42,8 +41,8 @@ const mapStateToProps = ({ todos, visibility }) => ({
     visibility
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    toggleTodo: (id) => dispatch(toggleTodo(id))
+const mapDispatchToProps = dispatch => ({
+    toggleTodo: id => dispatch(toggleTodo(id))
 })
 
 
