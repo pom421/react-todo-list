@@ -6,7 +6,7 @@ export const addTodo = (title) => {
     }
 }
 
-export const toggleTodo = (id) => {
+export const toggleTodo = id => {
 
     return {
         type: "TOGGLE_TODO",
@@ -14,7 +14,7 @@ export const toggleTodo = (id) => {
     }
 }
 
-export const setVisibility = (visibility) => {
+export const setVisibility = visibility => {
 
     return {
         type: "SET_VISIBILITY",
